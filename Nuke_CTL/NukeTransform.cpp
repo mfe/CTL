@@ -54,6 +54,15 @@
 
 #include "NukeTransform.h"
 
+
+#if defined(_MSC_VER)
+  #define snprintf _snprintf 
+  #define vsnprintf _vsnprintf 
+  #define strcasecmp _stricmp 
+  #define strncasecmp _strnicmp 
+#endif
+
+
 using namespace DD::Image;
 
 void
