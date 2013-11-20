@@ -206,6 +206,9 @@ void NukeCtlIop::checkModulePath() {
   const char* candidatePath = moduleSet ? modulePath : defaultModulePath;
   std::vector<std::string> paths = parseModulePath(candidatePath);
   // if a path is not valid then give an error message
+#ifdef _MSC_VER 
+  // TODO a check not depending from stat.
+#else
   for(std::vector<std::string>::iterator it = paths.begin(); it != paths.end(); it++) {
     temp = it->c_str();
     status = stat(temp, &buf);
@@ -215,6 +218,7 @@ void NukeCtlIop::checkModulePath() {
     }
     
   }
+#endif
   
 	if (err) {
     if (moduleSet)
